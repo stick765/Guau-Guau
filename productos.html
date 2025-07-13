@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop - Productos Premium</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --accent: #ff6b6b;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, #224abe 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('img/portada-productos.jpg') center/cover no-repeat;
+            min-height: 50vh;
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            background: white;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .product-body {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .product-description {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        
+        .btn-cart {
+            background: linear-gradient(135deg, var(--primary) 0%, #224abe 100%);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+        }
+        
+        .btn-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(78, 115, 223, 0.4);
+        }
+        
+        .category-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-title:hover::after {
+            width: 100%;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-paw me-2"></i> PetShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section d-flex align-items-center text-white">
+        <div class="container text-center">
+            <h1 class="display-4 animate__animated animate__fadeInDown">Nuestros Productos</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Lo mejor para tu mascota</p>
+        </div>
+    </header>
+
+    <!-- Sección de Productos -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Alimentos -->
+            <h2 class="category-title text-center" data-aos="fade-up">Alimentos Premium</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/comida_perro.jpg" class="product-img" alt="Comida premium para perro">
+                            <span class="product-badge">Nuevo</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Comida Premium para Perro</h3>
+                            <p class="product-description">Alimento balanceado para todas las razas, rico en proteínas y nutrientes esenciales.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$15.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/botellon_agua.webp" class="product-img" alt="Botellón de agua portátil">
+                            <span class="product-badge">Popular</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Botellón Portátil</h3>
+                            <p class="product-description">Dispensador para mantener hidratado a tu mascota durante paseos.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$12.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/comedero_alimento.webp" class="product-img" alt="Comedero automático">
+                            <span class="product-badge">Oferta</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Comedero Automático</h3>
+                            <p class="product-description">Programable para raciones exactas, acero inoxidable y fácil de limpiar.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$29.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Juguetes -->
+            <h2 class="category-title text-center mt-5" data-aos="fade-up">Juguetes Divertidos</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/jueguete_perro.jpg" class="product-img" alt="Juguete interactivo para perro">
+                            <span class="product-badge">Nuevo</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Juguete Interactivo</h3>
+                            <p class="product-description">Con sonido y textura estimulante, perfecto para perros activos.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$9.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/mochila_transportadora.webp" class="product-img" alt="Mochila transportadora">
+                            <span class="product-badge">Popular</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Mochila Transportadora</h3>
+                            <p class="product-description">Ventilada y cómoda para gatos y perros pequeños, con ventana de malla.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$34.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/jaula.webp" class="product-img" alt="Jaula para transporte">
+                            <span class="product-badge">Oferta</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Jaula de Transporte</h3>
+                            <p class="product-description">Segura y resistente, varios tamaños disponibles, fácil de transportar.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$45.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cuidado e Higiene -->
+            <h2 class="category-title text-center mt-5" data-aos="fade-up">Cuidado e Higiene</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/shampo_perros.webp" class="product-img" alt="Shampoo para perros">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Shampoo para Perros</h3>
+                            <p class="product-description">Hipoalergénico con avena, sin irritaciones, aroma fresco y duradero.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$8.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/cepillos_dentales.webp" class="product-img" alt="Cepillos dentales">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Kit Dental</h3>
+                            <p class="product-description">Incluye cepillo y pasta dental sabor a pollo, para una higiene completa.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$7.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/guante_parapeinar.webp" class="product-img" alt="Guante para peinar">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Guante para Peinar</h3>
+                            <p class="product-description">Elimina pelo suelto y masajea la piel, ideal para temporadas de muda.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$5.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Accesorios -->
+            <h2 class="category-title text-center mt-5" data-aos="fade-up">Accesorios Especiales</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/capa_impermeable.webp" class="product-img" alt="Capa impermeable">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Capa Impermeable</h3>
+                            <p class="product-description">Protege a tu perro de la lluvia, varios colores, ajuste perfecto.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$14.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="img/camisa_futbolera.webp" class="product-img" alt="Camisa futbolera">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Camisa Deportiva</h3>
+                            <p class="product-description">Ligera y cómoda, ideal para días soleados, varios diseños disponibles.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$11.99</span>
+                                <button class="btn-cart">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 PetShop - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html>

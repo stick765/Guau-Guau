@@ -1,0 +1,25 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.hero-section {
+    background: url('../img/banner-mascotas.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones con Animate.css (incluye la librería en el HTML) */
+.animate__animated {
+    --animate-duration: 1.5s;
+}
+
+/* Productos destacados */
+.card {
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
